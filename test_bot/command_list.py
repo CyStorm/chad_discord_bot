@@ -7,9 +7,16 @@ class BasicCommands(commands.Cog):
         self._last_member = None
 
     @commands.command()
-    async def smooth(self, ctx):
-        await ctx.send("William is smooth")
+    async def smooth(self, ctx, arg: str):
+        if ("Chad".casefold() not in arg.casefold()):
+            message = arg + " is smooth"
+        else:
+            message = "No insulting the Fuhrer"
+        await ctx.send(message)
 
     @commands.command()
     async def bdon(self, ctx):
         await ctx.send("bdon")
+
+    async def funcname(self, ctx):
+        pass

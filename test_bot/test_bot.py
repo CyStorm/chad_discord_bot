@@ -1,17 +1,15 @@
 import discord
+from discord.ext import commands
 
-client = discord.Client()
+class ChadBot(commands.Bot):
 
-@client.event
-async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    async def on_ready(self):
+        print('Logged on as {0}!'.format(self.user))
+        print(self.user.id)
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
-
-client.run('NzYyNTE3NzYzMTEzMzUzMjI2.X3qUAQ.cnO-oH49oUItIrRZWsGZ0zwM_bg')
+    async def on_message(self, message: discord.Message):
+        await super().on_message(message)
+        if (self.user.id != message.author.id):
+            if ("smooth" in message.content):
+                await message.channel.send("Recieved message {}".format(message))
+                await message.channel.send("William is smooth")

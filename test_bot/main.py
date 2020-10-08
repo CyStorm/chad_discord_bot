@@ -1,4 +1,4 @@
-from test_bot import ChadBot
+from bot_class import ChadBot
 from command_list import BasicCommands
 from discord.ext import commands
 from mysql import connector

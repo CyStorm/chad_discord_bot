@@ -22,7 +22,3 @@ class ChadBot(commands.Bot):
         #     if ("smooth" in message.content):
         #         await message.channel.send("Recieved message {}".format(message))
         #         await message.channel.send("William is smooth")
- 
-    # def write_data_to_xml(self, file, data):
-    #     tree = ElementTree.parse(file)
-    #     root = tree.getroot()

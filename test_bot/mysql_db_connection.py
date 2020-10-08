@@ -3,6 +3,7 @@ from mysql import connector
 
 #TODO remove when done testing 
 from mysql import connector
+
 DB_HOST = "127.0.0.1"
 DB_PORT = 3306
 DB_NAME = "discord_bot"
@@ -14,13 +15,21 @@ class MySqlDbConnection():
     def __init__(self):
         self.connection = connector.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD)
         self.cursor = self.connection.cursor()
+        self.db_name = DB_NAME 
 
     def __del__(self):
         self.connection.close()
 
     def execute_sql_command(self, command):
-        self.cursor.execute("USE {}".format(DB_NAME))
+        self.cursor.execute("USE {}".format(self.db_name))
         self.cursor.execute(command)
+    
+    def write_to_table(self, table, row, column, value):
+        pass
+
+    def read_from_table(self, table, row, column, value):
+        pass
+
 
 
 if __name__ == "__main__":

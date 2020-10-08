@@ -1,8 +1,9 @@
 from discord.ext import commands
+from bot_class import ChadBot
 
 class BasicCommands(commands.Cog):
 
-    def __init__(self, bot):
+    def __init__(self, bot: ChadBot):
         self.bot = bot
         self._last_member = None
 
@@ -18,5 +19,6 @@ class BasicCommands(commands.Cog):
     async def bdon(self, ctx):
         await ctx.send("bdon")
 
-    async def funcname(self, ctx):
+    @commands.command()
+    async def register(self, ctx):
         pass

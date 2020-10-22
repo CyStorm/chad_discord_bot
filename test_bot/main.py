@@ -2,10 +2,7 @@ from bot_class import ChadBot
 from command_list import BasicCommands
 from discord.ext import commands
 from mysql import connector
-
-#TODO move constants somewhere safe
-DISCORD_TOKEN = "NzYyNTE3NzYzMTEzMzUzMjI2.X3qUAQ.cnO-oH49oUItIrRZWsGZ0zwM_bg"
-
+from CONSTANTS import DISCORD_TOKEN
 
 
 if __name__ == "__main__":

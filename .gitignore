@@ -3,3 +3,4 @@ discord_bot_env
 */.vscode
 *.xml
 .vscode
+CONSTANTS.py

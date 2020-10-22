@@ -9,10 +9,12 @@ class BasicCommands(commands.Cog):
 
     @commands.command()
     async def smooth(self, ctx, arg: str):
-        if ("Chad".casefold() not in arg.casefold()):
+        if (arg is None):
+            message = "I love smooth"
+        elif ("Chad".casefold() not in arg.casefold()):
             message = arg + " is smooth"
         else:
-            message = "No insulting the Fuhrer"
+            message = "Imagine using my own bot to do this"
         await ctx.send(message)
 
     @commands.command()
@@ -20,5 +22,9 @@ class BasicCommands(commands.Cog):
         await ctx.send("bdon")
 
     @commands.command()
-    async def register(self, ctx):
-        pass
+    async def leodance(self, ctx):
+        await ctx.send("https://streamable.com/9kkogh")
+
+    @commands.command()
+    async def theylied(self, ctx):
+        await ctx.send("https://streamable.com/siv3xb")

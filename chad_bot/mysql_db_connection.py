@@ -16,7 +16,7 @@ class MySqlDbConnection():
     def __del__(self):
         self.connection.close()
 
-    def execute_sql_command(self, command: str):
+    def execute_sql_no_return(self, command: str):
         '''TODO cannot call this for all commands, need to make sure cursor object and commit commands are proper
         maybe even have a different one of this for modifying and non modifying sql queueys 
         '''
@@ -24,7 +24,16 @@ class MySqlDbConnection():
         cursor.execute("USE {}".format(self.db_name))
         cursor.execute(command)
         self.connection.commit()
+        cursor.close()
         #TODO need to do something with the cursor, fetch rows, or close it maybe yeild the cursor
+    
+    def execute_sql_with_return(self, command: str):
+        cursor = self.connection.cursor(dictionary=True, buffered=True)
+        cursor.execute("USE {}".format(self.db_name))
+        cursor.execute(command)
+        result = cursor.fetchall()
+        cursor.close()
+        return result
 
     def dict_to_equalstr_with_sep(self, input_dict: dict, separator: str):
         '''Formats python dictionary into key = value strings with separtor
@@ -37,22 +46,26 @@ class MySqlDbConnection():
         result_str = separator.join(result_list)
         return result_str
 
-    def insert_in_table(self, table: str, columns: tuple, values: tuple):
+    def insert_in_table(self, table: str, columns_tup: tuple, values_tup: tuple):
         '''Inserts into database table
         '''
-        col_str = str(columns).replace("'", "")
-        val_str = str(values)
+        col_str = str(columns_tup).replace("'", "")
+        val_str = str(values_tup)
         command = "INSERT INTO {table} {columns} VALUES {values}".format(table=table, columns=col_str, values=val_str)
-        self.execute_sql_command(command)
+        print(self.execute_sql_no_return(command))
 
     def update_to_table(self, table: str, update_dict: dict, condition_dict: dict):
         update_str = self.dict_to_equalstr_with_sep(update_dict, ", ")
         condition_str = self.dict_to_equalstr_with_sep(condition_dict, " AND ")
         command = "UPDATE {table} SET {update} WHERE {condition}".format(table=table, update=update_str, condition=condition_str)
-        self.execute_sql_command(command)
+        self.execute_sql_no_return(command)
 
-    def read_from_table(self):
-        pass
+    def read_from_table(self, table: str, columns_tup: tuple, condition_dict: dict):
+        col_str = ", ".join(columns_tup)
+        cond_str = self.dict_to_equalstr_with_sep(condition_dict, " AND ")
+        command = "SELECT {column} FROM {table} WHERE {condition}".format(table=table, column=col_str, condition=cond_str)
+        return self.execute_sql_with_return(command)
+
 
 if __name__ == "__main__":
     # cnt = connector.connect(host=DB_HOST, port=DB_PORT, user=DB_USER, password=DB_PASSWORD)
@@ -65,10 +78,11 @@ if __name__ == "__main__":
     }
 
     cond = {
-        "global_id": 1111
+        "global_id": 999
     }
     # print(actual.insert_in_table("members", ("global_id", "display_name", "smooth_counter"), (2231, "chad", 0)))
     # print(actual.dict_to_equalstr_with_sep(test, ", "))
-    # actual.execute_sql_command("INSERT INTO members (global_id, display_name, smooth_counter) VALUES (222, 'chad', 22)
-    a = actual.execute_sql_command("SELECT * FROM members")
-    print(a)
+    # actual.execute_sql_no_return("INSERT INTO members (global_id, display_name, smooth_counter) VALUES (1312344, 'chad', 22)")
+    # a = actual.read_from_table("members", ("global_id", "display_name", "smooth_counter"), cond)
+    b = actual.execute_sql_with_return("SHOW COLUMNS FROM members")
+    print(b)

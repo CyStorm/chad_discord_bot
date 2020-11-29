@@ -18,8 +18,9 @@ class BasicCommands(commands.Cog):
         await ctx.send(message)
 
     @commands.command()
-    async def bdon(self, ctx):
-        await ctx.send("bdon")
+    async def op(self, ctx):
+        await ctx.send('''no more mald, bot is here, actually working on it instead of spending my time useless malding, if you have 
+        ideas on features i'll make it happen''')
 
     @commands.command()
     async def leodance(self, ctx):

@@ -3,15 +3,12 @@
 
 from mysql import connector
 
-from CONSTANTS import DB_HOST, DB_NAME, DB_PASSWORD, DB_USER, DB_PORT
-
 
 class MySqlDbConnection():
 
-    def __init__(self):
-        self.connection = connector.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD)
-        self.cursor = self.connection.cursor()
-        self.db_name = DB_NAME 
+    def __init__(self, db_name, host, user, password):
+        self.connection = connector.connect(host=host, user=user, password=password)
+        self.db_name = db_name 
 
     def __del__(self):
         self.connection.close()
@@ -26,7 +23,7 @@ class MySqlDbConnection():
         self.connection.commit()
         cursor.close()
         #TODO need to do something with the cursor, fetch rows, or close it maybe yeild the cursor
-    
+
     def execute_sql_with_return(self, command: str):
         cursor = self.connection.cursor(dictionary=True, buffered=True)
         cursor.execute("USE {}".format(self.db_name))
@@ -66,10 +63,18 @@ class MySqlDbConnection():
         command = "SELECT {column} FROM {table} WHERE {condition}".format(table=table, column=col_str, condition=cond_str)
         return self.execute_sql_with_return(command)
 
+    def get_colum_names(self, table: str):
+        command = "SHOW COLUMNS FROM {}".format(table)
+        result = self.execute_sql_with_return(command)
+        return_list = []
+        for column in result:
+            return_list.append(column["Field"])
+        print(return_list)
+        return tuple(return_list)
 
 if __name__ == "__main__":
-    # cnt = connector.connect(host=DB_HOST, port=DB_PORT, user=DB_USER, password=DB_PASSWORD)
-    actual = MySqlDbConnection()
+    from CONSTANTS import DB_HOST, DB_NAME, DB_PASSWORD, DB_USER, DB_PORT
+    db = MySqlDbConnection(DB_NAME, DB_HOST, DB_USER, DB_PASSWORD)
     # actual.execute_sql_command("CREATE TABLE members")
     test = {
         "global_id": 999,
@@ -84,5 +89,5 @@ if __name__ == "__main__":
     # print(actual.dict_to_equalstr_with_sep(test, ", "))
     # actual.execute_sql_no_return("INSERT INTO members (global_id, display_name, smooth_counter) VALUES (1312344, 'chad', 22)")
     # a = actual.read_from_table("members", ("global_id", "display_name", "smooth_counter"), cond)
-    b = actual.execute_sql_with_return("SHOW COLUMNS FROM members")
+    b = db.get_colum_names("members")
     print(b)

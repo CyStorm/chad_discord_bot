@@ -1,5 +1,7 @@
 from discord.ext import commands
+from discord.ext.commands import Context
 from bot_class import ChadBot
+
 
 class BasicCommands(commands.Cog):
 
@@ -29,3 +31,8 @@ class BasicCommands(commands.Cog):
     @commands.command()
     async def theylied(self, ctx):
         await ctx.send("https://streamable.com/siv3xb")
+
+    @commands.command()
+    async def register(self, ctx):
+        author = ctx.author
+        self.bot.register_to_member_db(author)

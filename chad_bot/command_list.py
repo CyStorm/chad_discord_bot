@@ -10,7 +10,7 @@ class BasicCommands(commands.Cog):
         self._last_member = None
 
     @commands.command()
-    async def smooth(self, ctx, arg: str):
+    async def smooth(self, ctx, arg=None):
         if (arg is None):
             message = "I love smooth"
         elif ("Chad".casefold() not in arg.casefold()):
@@ -36,3 +36,12 @@ class BasicCommands(commands.Cog):
     async def register(self, ctx):
         author = ctx.author
         self.bot.register_to_member_db(author)
+
+    @commands.command()
+    async def facts(self, ctx):
+        import random
+        x = []
+        for _ in range(0, 5):
+            x.append(random.choice(["true", "facts"]))
+        message = "\n".join(x)
+        await ctx.send(message)

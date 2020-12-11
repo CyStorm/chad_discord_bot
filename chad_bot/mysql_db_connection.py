@@ -63,6 +63,11 @@ class MySqlDbConnection():
         command = "SELECT {column} FROM {table} WHERE {condition}".format(table=table, column=col_str, condition=cond_str)
         return self.execute_sql_with_return(command)
 
+    def read_all_from_table(self, table: str, condition_dict):
+        cond_str = self.dict_to_equalstr_with_sep(condition_dict, " AND ")
+        command = "SELECT * FROM {table} WHERE {condition}".format(table=table, condition=cond_str)
+        return self.execute_sql_with_return(command)
+
     def get_colum_names(self, table: str):
         command = "SHOW COLUMNS FROM {}".format(table)
         result = self.execute_sql_with_return(command)
@@ -71,6 +76,7 @@ class MySqlDbConnection():
             return_list.append(column["Field"])
         print(return_list)
         return tuple(return_list)
+
 
 if __name__ == "__main__":
     from CONSTANTS import DB_HOST, DB_NAME, DB_PASSWORD, DB_USER, DB_PORT

@@ -22,6 +22,12 @@ class ChadBot(commands.Bot):
         await super().on_message(message)
 
     def register_to_member_db(self, user):
+        '''Puts the user in database if not already exists
+        '''
         values = (user.id, user.name, 0)
         columns = self.db_connection.get_colum_names("members")
-        self.db_connection.insert_in_table("members", columns, values)
+        try:
+            self.db_connection.insert_in_table("members", columns, values)
+        except:
+            return False
+        return True

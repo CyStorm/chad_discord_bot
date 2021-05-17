@@ -3,7 +3,7 @@ from discord.ext import commands
 from mysql import connector
 
 from bot_class import ChadBot
-from command_list import BasicCommands
+from basic_commands import BasicCommands
 from mysql_db_connection import MySqlDbConnection
 
 
@@ -29,4 +29,4 @@ def main():
     client.run(DISCORD_TOKEN)
 
 if __name__ == "__main__":
-    test()
+    main()

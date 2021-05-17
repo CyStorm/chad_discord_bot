@@ -10,7 +10,7 @@ class BasicCommands(commands.Cog):
         self._last_member = None
 
     @commands.command()
-    async def smooth(self, ctx, arg=None):
+    async def smooth(self, ctx: Context, arg=None):
         if (arg is None):
             message = "I love smooth"
         elif ("Chad".casefold() not in arg.casefold()):
@@ -20,25 +20,29 @@ class BasicCommands(commands.Cog):
         await ctx.send(message)
 
     @commands.command()
-    async def op(self, ctx):
+    async def op(self, ctx: Context):
         await ctx.send('''no more mald, bot is here, actually working on it instead of spending my time useless malding, if you have 
         ideas on features i'll make it happen''')
 
     @commands.command()
-    async def leodance(self, ctx):
+    async def leodance(self, ctx: Context):
         await ctx.send("https://streamable.com/9kkogh")
 
     @commands.command()
-    async def theylied(self, ctx):
+    async def theylied(self, ctx: Context):
         await ctx.send("https://streamable.com/siv3xb")
 
     @commands.command()
-    async def register(self, ctx):
+    async def register(self, ctx: Context):
         author = ctx.author
-        self.bot.register_to_member_db(author)
+        success = self.bot.register_to_member_db(author)
+        if (success):
+            await ctx.send("Registerd user with id {}".format(author.id))
+        else:
+            await ctx.send("Failed to register user, probably already registered")
 
     @commands.command()
-    async def facts(self, ctx):
+    async def facts(self, ctx: Context):
         import random
         x = []
         for _ in range(0, 5):

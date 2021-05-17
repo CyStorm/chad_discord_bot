@@ -1,6 +1,6 @@
 discord_bot_env
-*/__pycache__
-*/.vscode
+__*
+.*
 *.xml
 .vscode
 CONSTANTS.py

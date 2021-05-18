@@ -2,6 +2,7 @@ from discord.ext import commands
 from discord.ext.commands import Context
 from bot_class import ChadBot
 
+from riotwatcher import LolWatcher, ApiError
 
 class RiotApiCommands(commands.Cog):
 
@@ -11,4 +12,5 @@ class RiotApiCommands(commands.Cog):
 
     @commands.command()
     async def search(self, ctx: Context, username):
-        pass
+        self.bot.lolapi.summoner.by_name("na1", username)
+        

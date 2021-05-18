@@ -76,24 +76,3 @@ class MySqlDbConnection():
             return_list.append(column["Field"])
         print(return_list)
         return tuple(return_list)
-
-
-if __name__ == "__main__":
-    from CONSTANTS import DB_HOST, DB_NAME, DB_PASSWORD, DB_USER, DB_PORT
-    db = MySqlDbConnection(DB_NAME, DB_HOST, DB_USER, DB_PASSWORD)
-    # actual.execute_sql_command("CREATE TABLE members")
-    test = {
-        "global_id": 999,
-        "display_name": "op",
-        "smooth_counter": 9
-    }
-
-    cond = {
-        "global_id": 999
-    }
-    # print(actual.insert_in_table("members", ("global_id", "display_name", "smooth_counter"), (2231, "chad", 0)))
-    # print(actual.dict_to_equalstr_with_sep(test, ", "))
-    # actual.execute_sql_no_return("INSERT INTO members (global_id, display_name, smooth_counter) VALUES (1312344, 'chad', 22)")
-    # a = actual.read_from_table("members", ("global_id", "display_name", "smooth_counter"), cond)
-    b = db.get_colum_names("members")
-    print(b)

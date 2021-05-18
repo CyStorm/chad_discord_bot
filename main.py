@@ -4,7 +4,9 @@ from mysql import connector
 
 from bot_class import ChadBot
 from basic_commands import BasicCommands
+from riot_api_commands import RiotApiCommands
 from mysql_db_connection import MySqlDbConnection
+from riotwatcher import LolWatcher
 
 
 def test():
@@ -21,11 +23,14 @@ def main():
     except KeyError:
         print("Please set proper variables in environment")
         raise
-
+    
+    # TODO add logic here to include different cog packages or not on CLI
     db = MySqlDbConnection(DB_NAME, DB_HOST, DB_USER, DB_PASSWORD)
-    client = ChadBot(command_prefix="!", db_connection=db)
+    lol = LolWatcher(os.environ["RIOT_API_KEY"])
+    client = ChadBot(command_prefix="!", db_connection=db, lolapi=lol)
 
     client.add_cog(BasicCommands(client))
+    client.add_cog(RiotApiCommands(client))
     client.run(DISCORD_TOKEN)
 
 if __name__ == "__main__":

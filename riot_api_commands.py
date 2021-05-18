@@ -2,7 +2,8 @@ from discord.ext import commands
 from discord.ext.commands import Context
 from bot_class import ChadBot
 
-from riotwatcher import LolWatcher, ApiError
+from riotwatcher import LolWatcher
+from requests.exceptions import HTTPError
 
 class RiotApiCommands(commands.Cog):
 
@@ -12,5 +13,9 @@ class RiotApiCommands(commands.Cog):
 
     @commands.command()
     async def search(self, ctx: Context, username):
-        self.bot.lolapi.summoner.by_name("na1", username)
-        
+        summoner = self.bot.lolapi.summoner.by_name("na1", username)
+        try:
+            match = self.bot.lolapi.spectator.by_summoner("na1", summoner["id"])
+            await ctx.send(match)
+        except HTTPError as e:
+            await ctx.send(e.response.status_code)

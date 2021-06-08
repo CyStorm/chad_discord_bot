@@ -27,10 +27,7 @@ class RiotApiCommands(commands.Cog):
         match = self.is_in_game(game, summoner)
         if (match):
             if (game == "lol"):
-                players = []
-                for player in match["participants"]:
-                    players.append(player["summonerName"])
-                await ctx.send(", ".join(players))
+                await ctx.send(self.parse_lol_match(match, summoner))
             elif (game == "tft"):
                 await ctx.send(self.parse_tft_match(match, summoner))
         else:
@@ -41,9 +38,16 @@ class RiotApiCommands(commands.Cog):
             if (player["puuid"] == summoner["puuid"]):
                 traits = []
                 for trait in player["traits"]:
-                    traits.append(trait["name"])
+                    traits.append(trait["name"].replace("Set5_", ""))
                 comp = ", ".join(traits)
-                message = "Placed number {placement}, with {gold_left} gold left and comp:".format(**player) + comp
+                message = summoner["name"] + " is currently number {placement}, with {gold_left} gold left and comp: ".format(**player) + comp
+        return message
+
+    def parse_lol_match(self, match, summoner):
+        players = []
+        for player in match["participants"]:
+            players.append(player["summonerName"])
+        message = "Currently in a {gameType} game with players: ".format(**match) + ", ".join(players)
         return message
 
     def is_in_game(self, game, summoner):

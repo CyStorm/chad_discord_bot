@@ -20,11 +20,6 @@ class BasicCommands(commands.Cog):
         await ctx.send(message)
 
     @commands.command()
-    async def op(self, ctx: Context):
-        await ctx.send('''no more mald, bot is here, actually working on it instead of spending my time useless malding, if you have 
-        ideas on features i'll make it happen''')
-
-    @commands.command()
     async def leodance(self, ctx: Context):
         await ctx.send("https://streamable.com/9kkogh")
 

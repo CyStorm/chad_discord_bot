@@ -25,10 +25,10 @@ def main():
         raise
 
     # TODO add logic here to include different cog packages or not on CLI
-    # db = MySqlDbConnection(DB_NAME, DB_HOST, DB_USER, DB_PASSWORD)
+    db = MySqlDbConnection(DB_NAME, DB_HOST, DB_USER, DB_PASSWORD)
     lol = LolWatcher(os.environ["RIOT_API_KEY"])
     tft = TftWatcher(os.environ["RIOT_API_KEY"])
-    client = ChadBot(command_prefix="!", db_connection=None, lolapi=lol, tftapi=tft)
+    client = ChadBot(command_prefix="?", db_connection=None, lolapi=lol, tftapi=tft)
 
     client.add_cog(BasicCommands(client))
     client.add_cog(RiotApiCommands(client))

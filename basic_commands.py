@@ -21,8 +21,7 @@ class BasicCommands(commands.Cog):
 
     @commands.command()
     async def op(self, ctx: Context):
-        await ctx.send('''no more mald, bot is here, actually working on it instead of spending my time useless malding, if you have 
-        ideas on features i'll make it happen''')
+        await ctx.send('''Chad is smooth''')
 
     @commands.command()
     async def leodance(self, ctx: Context):

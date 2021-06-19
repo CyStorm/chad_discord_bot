@@ -31,12 +31,15 @@ class Artifact:
     
     def __str__(self):
         to_return =  '''
+---------------------------------
 Artifact Type: {}
 Main Stat: {}
 
 Substats:\n'''.format(self.artifact_type, self.main_stat)
         for key in self.sub_stats:
             to_return += key + "\t" + str(self.sub_stats[key]) + "\n"
+        to_return += "---------------------------------\n"
+        #print(to_return)
         return to_return
     
 

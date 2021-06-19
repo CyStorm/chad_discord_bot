@@ -49,11 +49,20 @@ class BasicCommands(commands.Cog):
         message = "\n".join(x)
         await ctx.send(message)
 
+    """
+    Sends a very straightforward command manual
+
+    args: 
+    command_type : the type of command the user wishes to learn about, defaults to basic commands
+
+    return: None
+    """
     @commands.command()
     async def chad_help(self, ctx: Context, command_type=None):
         if command_type == None:
             await ctx.send('''
 !facts
+!generate_artifact <num_artifacts=1> - generates a maximum of 10 artifacts randomly
 !leodance
 !op
 !register - registers the user who invoked this command with Chadbot
@@ -67,8 +76,19 @@ class BasicCommands(commands.Cog):
 *use !chad_help for a list of basic commands
             ''')
 
+    """
+    Given the number of artifacts the user wishes to generate, randomly generate that number of artifacts (caps at 10)
+
+    args: 
+    command_type : the type of command the user wishes to learn about, defaults to basic commands
+
+    return: None
+    """
     @commands.command()
-    async def generate_artifact(self, ctx: Context):
+    async def generate_artifact(self, ctx: Context, num_artifacts=1):
         import artifact
-        a = artifact.Artifact()
-        await ctx.send(a)
+        if num_artifacts > 10:
+            num_artifacts = 10
+        for i in range(num_artifacts):
+            a = artifact.Artifact()
+            await ctx.send(a)

@@ -48,3 +48,27 @@ class BasicCommands(commands.Cog):
             x.append(random.choice(["true", "facts"]))
         message = "\n".join(x)
         await ctx.send(message)
+
+    @commands.command()
+    async def chad_help(self, ctx: Context, command_type=None):
+        if command_type == None:
+            await ctx.send('''
+!facts
+!leodance
+!op
+!register - registers the user who invoked this command with Chadbot
+!smooth <person=None>
+!theylied
+*use !chad_help game for a list of LoL commands
+            ''')
+        elif command_type.lower() == "lol":
+            await ctx.send('''
+?search <username> <game=LoL> - Prints out info regarding the specific user
+*use !chad_help for a list of basic commands
+            ''')
+
+    @commands.command()
+    async def generate_artifact(self, ctx: Context):
+        import artifact
+        a = artifact.Artifact()
+        await ctx.send(a)

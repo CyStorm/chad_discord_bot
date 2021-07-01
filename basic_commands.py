@@ -1,6 +1,7 @@
 from discord.ext import commands
 from discord.ext.commands import Context
 from bot_class import ChadBot
+import random
 
 
 class BasicCommands(commands.Cog):
@@ -38,9 +39,20 @@ class BasicCommands(commands.Cog):
 
     @commands.command()
     async def facts(self, ctx: Context):
-        import random
         x = []
         for _ in range(0, 5):
             x.append(random.choice(["true", "facts"]))
         message = "\n".join(x)
         await ctx.send(message)
+
+    @commands.command()
+    async def flip_coin(self, ctx: Context):
+        await ctx.send(random.choice(["Heads", "Tails"]))
+    
+    @commands.command()
+    async def random_choose(self, ctx: Context, args):
+        if (args is None):
+            await ctx.send("please provide a comma seperated list of options to randomly choose from")
+        else:
+            options = args.split(",")
+            await ctx.send(random.choice(options))

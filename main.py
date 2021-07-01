@@ -16,10 +16,10 @@ def test():
 def main():
     try:
         DISCORD_TOKEN = os.environ["DISCORD_TOKEN"]
-        DB_HOST = os.environ["DB_HOST"]
-        DB_NAME = os.environ["DB_NAME"]
-        DB_USER = os.environ["DB_USER"]
-        DB_PASSWORD = os.environ["DB_PASSWORD"]
+        # DB_HOST = os.environ["DB_HOST"]
+        # DB_NAME = os.environ["DB_NAME"]
+        # DB_USER = os.environ["DB_USER"]
+        # DB_PASSWORD = os.environ["DB_PASSWORD"]
     except KeyError:
         print("Please set proper variables in environment")
         raise

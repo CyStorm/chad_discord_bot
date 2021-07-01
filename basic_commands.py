@@ -56,3 +56,47 @@ class BasicCommands(commands.Cog):
         else:
             options = args.split(",")
             await ctx.send(random.choice(options))
+
+    @commands.command()
+    async def chad_help(self, ctx: Context, command_type=None):
+        """
+        Sends a very straightforward command manual
+
+        args: 
+        command_type : the type of command the user wishes to learn about, defaults to basic commands
+
+        return: None
+        """
+        if command_type == None:
+            await ctx.send('''
+                            !facts
+                            !generate_artifact <num_artifacts=1> - generates a maximum of 10 artifacts randomly
+                            !leodance
+                            !op
+                            !register - registers the user who invoked this command with Chadbot
+                            !smooth <person=None>
+                            !theylied
+                            *use !chad_help game for a list of LoL commands
+                            ''')
+        elif command_type.lower() == "lol":
+            await ctx.send('''
+                            ?search <username> <game=LoL> - Prints out info regarding the specific user
+                            *use !chad_help for a list of basic commands
+                            ''')
+
+    @commands.command()
+    async def generate_artifact(self, ctx: Context, num_artifacts=1):   
+        """
+        Given the number of artifacts the user wishes to generate, randomly generate that number of artifacts (caps at 10)
+
+        args: 
+        command_type : the type of command the user wishes to learn about, defaults to basic commands
+
+        return: None
+        """
+        import artifact
+        if num_artifacts > 10:
+            num_artifacts = 10
+        for _ in range(num_artifacts):
+            a = artifact.Artifact()
+            await ctx.send(a)

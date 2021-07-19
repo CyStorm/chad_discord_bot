@@ -5,6 +5,7 @@ from mysql import connector
 from bot_class import ChadBot
 from basic_commands import BasicCommands
 from riot_api_commands import RiotApiCommands
+from chess_commands import ChessCommands
 from mysql_db_connection import MySqlDbConnection
 from riotwatcher import LolWatcher, TftWatcher
 
@@ -33,6 +34,12 @@ def main():
     client.add_cog(BasicCommands(client))
     client.add_cog(RiotApiCommands(client))
     client.run(DISCORD_TOKEN)
+
+# code from SO
+# def get_prefixes(bot, message): 
+#     cog_prefixes = (cog.prefix for cog in bot.cogs.values() if hasattr(cog, 'prefix'))
+#     default_prefixes = ("!")
+#     return (*cog_prefixes, *default_prefixes)
 
 if __name__ == "__main__":
     main()

@@ -89,4 +89,3 @@ class RiotApiCommands(commands.Cog):
 if __name__ == "__main__":
     import os
     w = LolWatcher(os.environ["RIOT_API_KEY"])
-

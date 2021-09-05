@@ -36,7 +36,7 @@ def main():
     client.run(DISCORD_TOKEN)
 
 # code from SO
-# def get_prefixes(bot, message): 
+# def get_prefixes(bot, message):
 #     cog_prefixes = (cog.prefix for cog in bot.cogs.values() if hasattr(cog, 'prefix'))
 #     default_prefixes = ("!")
 #     return (*cog_prefixes, *default_prefixes)

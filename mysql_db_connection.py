@@ -8,21 +8,21 @@ class MySqlDbConnection():
 
     def __init__(self, db_name, host, user, password):
         self.connection = connector.connect(host=host, user=user, password=password)
-        self.db_name = db_name 
+        self.db_name = db_name
 
     def __del__(self):
         self.connection.close()
 
     def execute_sql_no_return(self, command: str):
         '''TODO cannot call this for all commands, need to make sure cursor object and commit commands are proper
-        maybe even have a different one of this for modifying and non modifying sql queueys 
+        maybe even have a different one of this for modifying and non modifying sql queueys
         '''
         cursor = self.connection.cursor()
         cursor.execute("USE {}".format(self.db_name))
         cursor.execute(command)
         self.connection.commit()
         cursor.close()
-        #TODO need to do something with the cursor, fetch rows, or close it maybe yeild the cursor
+        # TODO need to do something with the cursor, fetch rows, or close it maybe yeild the cursor
 
     def execute_sql_with_return(self, command: str):
         cursor = self.connection.cursor(dictionary=True, buffered=True)

@@ -48,7 +48,7 @@ class BasicCommands(commands.Cog):
     @commands.command()
     async def flip_coin(self, ctx: Context):
         await ctx.send(random.choice(["Heads", "Tails"]))
-    
+
     @commands.command()
     async def random_choose(self, ctx: Context, args):
         if (args is None):
@@ -62,12 +62,12 @@ class BasicCommands(commands.Cog):
         """
         Sends a very straightforward command manual
 
-        args: 
+        args:
         command_type : the type of command the user wishes to learn about, defaults to basic commands
 
         return: None
         """
-        if command_type == None:
+        if (command_type is None):
             await ctx.send('''
                             !facts
                             !generate_artifact <num_artifacts=1> - generates a maximum of 10 artifacts randomly
@@ -85,11 +85,11 @@ class BasicCommands(commands.Cog):
                             ''')
 
     @commands.command()
-    async def generate_artifact(self, ctx: Context, num_artifacts=1):   
+    async def generate_artifact(self, ctx: Context, num_artifacts=1):
         """
         Given the number of artifacts the user wishes to generate, randomly generate that number of artifacts (caps at 10)
 
-        args: 
+        args:
         command_type : the type of command the user wishes to learn about, defaults to basic commands
 
         return: None

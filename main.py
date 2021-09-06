@@ -29,10 +29,11 @@ def main():
     # db = MySqlDbConnection(DB_NAME, DB_HOST, DB_USER, DB_PASSWORD)
     # lol = LolWatcher(os.environ["RIOT_API_KEY"])
     # tft = TftWatcher(os.environ["RIOT_API_KEY"])
-    client = ChadBot(command_prefix="?", db_connection=None, lolapi=None, tftapi=None)
+    client = ChadBot(command_prefix="!", db_connection=None, lolapi=None, tftapi=None)
 
     client.add_cog(BasicCommands(client))
-    client.add_cog(RiotApiCommands(client))
+    # client.add_cog(RiotApiCommands(client))
+    client.add_cog(ChessCommands(client))
     client.run(DISCORD_TOKEN)
 
 # code from SO

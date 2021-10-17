@@ -21,14 +21,6 @@ class BasicCommands(commands.Cog):
         await ctx.send(message)
 
     @commands.command()
-    async def leodance(self, ctx: Context):
-        await ctx.send("https://streamable.com/9kkogh")
-
-    @commands.command()
-    async def theylied(self, ctx: Context):
-        await ctx.send("https://streamable.com/siv3xb")
-
-    @commands.command()
     async def register(self, ctx: Context):
         author = ctx.author
         success = self.bot.register_to_member_db(author)
